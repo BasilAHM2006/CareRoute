@@ -1,0 +1,44 @@
+services:
+  - type: web
+    name: careroute-api
+    runtime: docker
+    plan: 1c-2g
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /api/health
+    autoDeploy: false
+    envVars:
+      - key: CAREROUTE_API_HOST
+        value: 0.0.0.0
+      - key: CAREROUTE_PREBUILT_INDEX
+        value: "1"
+      - key: CAREROUTE_INDEX_PATH
+        value: /app/index/facility_search.sqlite3
+      - key: CAREROUTE_EXPECTED_FACILITY_COUNT
+        value: "166462"
+      - key: CAREROUTE_EXPECTED_PILOT_PROVIDERS
+        value: "4"
+      - key: CAREROUTE_EXPECTED_PILOT_OFFERS
+        value: "16"
+      - key: CAREROUTE_EXPECTED_DEMO_COUNT
+        value: "1000"
+      - key: CAREROUTE_ALLOWED_ORIGINS
+        value: https://careroute-web.onrender.com
+
+  - type: web
+    name: careroute-web
+    runtime: static
+    rootDir: frontend
+    buildCommand: npm ci && npm run build
+    staticPublishPath: dist
+    autoDeploy: false
+    envVars:
+      - key: VITE_API_BASE_URL
+        value: https://careroute-api.onrender.com
+    routes:
+      - type: rewrite
+        source: /providers/*
+        destination: /index.html
+      - type: rewrite
+        source: /facilities/*
+        destination: /index.html

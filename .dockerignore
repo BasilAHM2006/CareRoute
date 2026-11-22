@@ -1,0 +1,15 @@
+# Build an API-only image from a small, explicit allowlist.
+**
+!Dockerfile
+!requirements-deploy.txt
+!frontend/
+!frontend/server/
+!frontend/server/search_api.py
+!data/
+!data/raw/
+!data/raw/india_public_healthcare.parquet
+!data/raw/careroute_1000_clean_synthetic_demo_records.csv
+!data/processed/
+!data/processed/india_healthcare_cleaned.parquet
+!data/processed/india_healthcare_cleaned.csv
+!data/processed/nagercoil_verified_provider_pilot.csv

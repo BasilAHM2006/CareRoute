@@ -1,0 +1,23 @@
+# Local Python environments and caches
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+
+# Frontend dependencies and generated artifacts
+frontend/node_modules/
+frontend/dist/
+frontend/dist-ssr/
+frontend/.data/
+frontend/coverage/
+
+# Local environment, credentials, logs, and OS metadata
+.env
+.env.*
+!.env.example
+*.local
+*.log
+.DS_Store
+Thumbs.db
